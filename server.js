@@ -1,6 +1,11 @@
+//server.js
+
+const ejs = require('ejs');
 const express = require('express');
 const app = express();
+const PORT = 3000;
 
+//data
 const RESTAURANT = {
   name: 'The Green Byte Bistro',
   isOpen: true,
@@ -50,14 +55,19 @@ const RESTAURANT = {
   ]
 };
 
-
+//index
 app.get('/', (req, res) => {
-  res.send('Hello There!');
+  res.render('home.ejs', {
+    msg: "Here is the restraunt data",
+    name: RESTAURANT.name,
+    address: RESTAURANT.address,
+    phone: RESTAURANT.phone, 
+  RESTAURANT: RESTAURANT,
+  });
 });
 
-app.get('/views/home.ejs', (req, res) => {
-  
-})
 
-app.listen(3000);
-
+//listener
+app.listen(PORT, () => {
+  console.log('🎧 Listening to 3000')
+});
