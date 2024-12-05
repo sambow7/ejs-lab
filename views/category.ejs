@@ -1,13 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Menu</title>
+  <style>
+    * {
+      font-family: Arial, sans-serif;
+    }
+
+    #menu {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      width: fill-available;
+      border: 1px solid black;
+      margin: 10px;
+      padding: 10px;
+      gap: 10px;
+    }
+
+    .item {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid black;
+      padding: 10px;
+      width: 20em;
+      justify-content: space-between;
+      height: 15em;
+    }
+
+    .name {
+      font-size: 1.5em;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    .details {
+      font-size: 1.2em;
+    }
+
+    .footer {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-top: 10px;
+      /* Small gap from the content */
+    }
+
+    .price {
+      font-size: 1.2em;
+    }
+
+    .fa-star {
+      color: gold;
+    }
+
+    .rating {
+      display: flex;
+      gap: 2px;
+    }
+  </style>
 </head>
+
 <body>
   <%- include('./partials/nav') %>
-  
-  <h1>Full Menu</h1>
+    <% if (categories) { %>
+      <% categories.forEach(category=> { %>
+        <% console.log(category); %>
+          <h1>
+            <%= category.toUpperCase() %>
+          </h1>
+          <div id="menu">
+            <% menu.forEach(item=> { %>
+              <% if (item.category===category) { %>
+                <div class="item">
+                  <p class="name">
+                    <%= item.name %>
+                      <% if (item.rating===5) { %>
+                        ⭐
+                        <% } %>
+                  </p>
+                  <p class="details">
+                    <%= item.details %>
+                  </p>
+                  <div class="footer">
+                    <p class="price">$<%= item.price.toFixed(2) %>
+                    </p>
+                    <p class="rating">
+                      <% for (let i=0; i < item.rating; i++) { %>
+                        <i class="fas fa-star"></i>
+                        <% } %>
+                          <% for (let i=item.rating; i < 5; i++) { %>
+                            <i class="far fa-star"></i>
+                            <% } %>
+                    </p>
+                  </div>
+                </div>
+                <% } %>
+                  <% }) %>
+          </div>
+          <% }) %>
+            <% } %>
 </body>
+
 </html>
