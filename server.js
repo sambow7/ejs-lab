@@ -66,16 +66,30 @@ app.get('/', (req, res) => {
   });
 });
 
-app.get("/menu", (req, res) => {
-  res.render('menu.ejs')
-})
+app.get('/menu', (req, res) => {
+  let categories = RESTAURANT.menu.map(item => item.category);
+  categories = [...new Set(categories)];
+  const response = {
+    categories: categories,
+    section: 'Full Menu',
+    menu: RESTAURANT.menu
+  };    
+  res.render('menu.ejs', response);
+});
 
-app.get("/menu:category", (req,res) => {
-  res.render('category.ejs')
-})
+app.get('/menu/:category', (req, res) => {
+  const category = req.params.category;
+  const menu = RESTAURANT.menu.filter(item => item.category === category);
+  const response = {
+    categories: [category],
+    section: category,
+    menu: menu
+  };    
+  res.render('category.ejs', response);
+});
 
 
 //listener
 app.listen(PORT, () => {
-  console.log('🎧 Listening to 3000')
+  console.log('🎧 Server listening to 3000')
 });

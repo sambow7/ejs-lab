@@ -6,7 +6,6 @@
   <title><%= RESTAURANT.name %></title>
 </head>
 <body>
-
   <%- include('./partials/nav') %>
 
   <h1><%= RESTAURANT.name %></h1>
@@ -15,9 +14,9 @@
     <h3><%= RESTAURANT.address %></h3> 
     <h3><%= RESTAURANT.phone %></h3>
     <% if (RESTAURANT.isOpen) { %>
-      <h3>We Are Open</h3>
+      <h3>We Are Open! </h3>
     <% } else { %>
-      <h3>Sorry, We Are Closed</h3>
+      <h3>Sorry, We Are Closed 😴</h3>
     <% } %>
   
 </body>
